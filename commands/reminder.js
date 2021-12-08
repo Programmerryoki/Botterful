@@ -209,9 +209,8 @@ const createCountdown = async (msg, schDay, maintitle, maindescription, mainfiel
 module.exports = {
   name: 'reminder',
   aliases: ['rd'],
-  description: '',
+  description: 'This is a countdown function',
   example: 'rk!rd countdown 00-23-18-*-*-* テスト 説明文 test,hi,t:?:t,h,f countdown,well,f:?:cc,we,t',
-  example: 'rk!rd countdown 00-00-00-10-5-* 二ノ国配信日だ！ 今日は二ノ国の配信日だよ！準備はいいかい？？ ナミサさんが言ったように、サーバーはウサギ第一！できなかったらすぐに連絡してね！,第二候補はくじらだよ！,t 二ノ国開始日までのカウントダウンだよ！,byリアキ,t:?:カウントダウンの見方！,日：時：分：秒,f:?:よくわからなかったらリアキまで連絡お願いします！,急遽作成したやつだから、どんなエラーあるかわからない！ｗ,f',
   cooldown: 1,
   execute(client, message, args, cmd, Discord, profileData) {
     // console.log(args);

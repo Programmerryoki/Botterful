@@ -1,9 +1,10 @@
 const profileModel = require('../models/profileSchema');
 
-const pmMoneyBronze = async (member, amount) => {
+const pmMoneyBronze = async (memberID, guildID, amount) => {
   let profile = await profileModel.findOneAndUpdate(
     {
-      userID: member.id,
+      userID: memberID,
+      serverID: guildID
     },
     {
       $inc: {
@@ -11,12 +12,14 @@ const pmMoneyBronze = async (member, amount) => {
       },
     }
   );
+  return profile;
 };
 
-const pmMoneySilver = async (member, amount) => {
+const pmMoneySilver = async (memberID, guildID, amount) => {
   let profile = await profileModel.findOneAndUpdate(
     {
-      userID: member.id,
+      userID: memberID,
+      serverID: guildID
     },
     {
       $inc: {
@@ -24,12 +27,14 @@ const pmMoneySilver = async (member, amount) => {
       },
     }
   );
+  return profile
 };
 
-const pmMoneyGold = async (member, amount) => {
+const pmMoneyGold = async (memberID, guildID, amount) => {
   let profile = await profileModel.findOneAndUpdate(
     {
-      userID: member.id,
+      userID: memberID,
+      serverID: guildID
     },
     {
       $inc: {
@@ -37,10 +42,17 @@ const pmMoneyGold = async (member, amount) => {
       },
     }
   );
+  return profile
 };
+
+const getMoney = async (memberID, guildID) => {
+  let profileData = await profileModel.findOne({ userID: memberID, serverID: guildID });
+  return profileData;
+}
 
 module.exports = {
   pmMoneyBronze,
   pmMoneySilver,
   pmMoneyGold,
+  getMoney,
 };

@@ -15,8 +15,8 @@ const createProfile = async (memberID, guildID) => {
   }
 };
 
-const deleteProfile = async (memberID) => {
-  profileData = await profileModel.findOneAndDelete({ userID: memberID });
+const deleteProfile = async (memberID, guildID) => {
+  profileData = await profileModel.findOneAndDelete({ userID: memberID, serverID: guildID });
 };
 
 module.exports = {

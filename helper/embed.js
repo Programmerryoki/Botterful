@@ -2,10 +2,6 @@ const createEmbed = (Title, Description, FieldList) => {
   const embed = {
     color: 0x0099ff,
     title: Title,
-    author: {
-      name: 'あるかん',
-      icon_url: 'https://icedrive.net/0/452dgU6Qeb',
-    },
     description: Description,
     fields: FieldList,
     image: {
@@ -13,8 +9,7 @@ const createEmbed = (Title, Description, FieldList) => {
     },
     timestamp: new Date(),
     footer: {
-      text: 'あるかん by Programmerryoki',
-      icon_url: 'https://icedrive.net/0/452dgU6Qeb',
+      text: 'Butterful by Programmerryoki',
     },
   };
 

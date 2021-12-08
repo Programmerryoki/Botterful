@@ -2,8 +2,8 @@ module.exports = {
   name: 'directmessage',
   aliases: ['DM', 'dm'],
   description: 'This is a DM command!',
-  example: 'rk!dm [@User] You wanna eat lunch?',
-  example: 'rk!dm [@User1,@User2] You wanna eat lunch?',
+  example: 'dm [@User] You wanna eat lunch?',
+  example: 'dm [@User1,@User2] You wanna eat lunch?',
   cooldown: 10,
   execute(client, message, args, cmd, Discord, profileData) {
     message.delete({ reason: 'For Testing' }).catch(console.error);
