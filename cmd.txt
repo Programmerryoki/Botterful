@@ -1,0 +1,2 @@
+node = node_modules/.bin/node
+npm = ]/bin/npm

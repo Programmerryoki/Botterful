@@ -6,7 +6,7 @@ server.all("/", (req, res) => {
   res.send("Bot is running!");
 });
 
-keepAlive = () => {
+var keepAlive = () => {
   server.listen(1212, () => {
     console.log('Server is ready.');
   });

@@ -5,7 +5,10 @@ const cooldowns = new Map();
 
 module.exports = async (Discord, client, message) => {
   const prefix = process.env.PREFIX;
-  if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.content.startsWith(prefix) || message.author.bot) {
+    // Speaking Here!
+    return;
+  }
 
   let profileData;
   try {
@@ -22,6 +25,7 @@ module.exports = async (Discord, client, message) => {
 
   if (!command) {
     message.reply(`Command: "${PREFIX+cmd}" not found!`);
+    return;
   } 
 
   if (!cooldowns.has(command.name)) {
@@ -55,8 +59,8 @@ module.exports = async (Discord, client, message) => {
     message.reply('There was an error trying to execute this command!');
     console.log(err);
   } finally {
-    message.delete().catch((err) => {
-      console.log(err);
-    })
+    // message.delete(5).catch((err) => {
+    //   console.log(err);
+    // })
   }
 };

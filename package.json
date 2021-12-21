@@ -1,19 +1,38 @@
 {
   "name": "arukan-Bot-JS",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cron": "^1.8.2",
-    "discord.js": "^12.5.3",
-    "express": "^4.17.1",
-    "moment": "^2.29.1",
-    "mongoose": "^5.12.13"
-  }
+    "@discordjs/voice": "latest",
+    "@google-cloud/text-to-speech": "latest",
+    "axios": "latest",
+    "cron": "latest",
+    "discord.js": "latest",
+    "express": "latest",
+    "ffmpeg-static": "^4.4.0",
+    "moment": "latest",
+    "mongoose": "latest",
+    "node": "latest",
+    "npm": "latest",
+    "opusscript": "^0.0.8"
+  },
+  "devDependencies": {
+    "node": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Programmerryoki/Botterful.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Programmerryoki/Botterful/issues"
+  },
+  "homepage": "https://github.com/Programmerryoki/Botterful#readme",
+  "description": ""
 }
