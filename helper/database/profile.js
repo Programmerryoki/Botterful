@@ -1,4 +1,4 @@
-const profileModel = require('../models/profileSchema');
+const profileModel = require('../../models/profileSchema');
 
 const createProfile = async (memberID, guildID) => {
   profileData = await profileModel.findOne({ userID: memberID });
@@ -22,4 +22,4 @@ const deleteProfile = async (memberID, guildID) => {
 module.exports = {
   createProfile,
   deleteProfile,
-};
+}

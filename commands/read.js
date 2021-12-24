@@ -6,19 +6,19 @@ module.exports = {
   description: 'Bot reads out the text',
   example: '',
   cooldown: 1,
-  execute(client, message, args, cmd, Discord, profileData) {
+  async execute(client, message, args, cmd, Discord, profileData) {
     console.log(args);
     if (args.length == 0) throw "Not Enough Arguments";
-    if (args[0].toLowerCase() == "start" || args[0].toLowerCase() == "s") {
-      // console.log(message.member.voice);
+    if (args[0] == "start" || args[0] == "s") {
       const connection = createVC(message.member.voice);
-      // console.log(connection);
-    } else if (args[0].toLowerCase() == "e" || args[0].toLowerCase() == "end") {
+      client.settings.set("readChannel", );
+    } else if (args[0] == "e" || args[0] == "end") {
       deleteVC(message.member.voice.channel);
-    } else if (args[0].toLowerCase() == "out" || args[0].toLowerCase() == "o") {
-      const connection = accessVC(message.member.voice);
+    } else if (args[0] == "out" || args[0] == "o") {
+      accessVC(message.member.voice);
       var sentence = args.slice(1).join(" ");
-      speakVC(message, sentence);
+      await speakVC(message, sentence);
+      setTimeout(() => deleteVC(message.member.voice), 5_000);
     }
   },
 };

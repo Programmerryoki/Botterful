@@ -1,23 +1,37 @@
 const PREFIX = process.env['PREFIX'];
-const { createProfile } = require('../../helper/database');
+const { createProfile } = require('../../helper/database/profile');
+const { createGuildSetting, getSetting } = require('../../helper/database/guildSetting');
+const { getVC, speakVC } = require("../../helper/voice");
 
 const cooldowns = new Map();
 
 module.exports = async (Discord, client, message) => {
   const prefix = process.env.PREFIX;
+  const gid = message.guild.id;
+  const obj = await getSetting(gid);
+  client.settings.set(gid, obj);
+  const settings = client.settings.get(gid);
+  
   if (!message.content.startsWith(prefix) || message.author.bot) {
-    // Speaking Here!
+    if (message.author.bot) return;
+    if (!message.member.voice) return;
+    const tmp = await getVC(message.member.voice);
+    if (!tmp) return;
+    if (message.channel.id != settings.drChannel) return;
+    await speakVC(message, message.content);
     return;
   }
 
-  let profileData;
   try {
-    createProfile(message.author.id, message.guild.id);
+    await createProfile(message.author.id, gid);
   } catch (err) {
     console.log(err);
   }
 
-  const args = message.content.slice(prefix.length).split(/ +/);
+  var args = message.content.slice(prefix.length).split(/ +/);
+  args = args.map((item) => {
+    return item.toLowerCase()
+  });
   const cmd = args.shift().toLowerCase();
   const command =
     await client.commands.get(cmd) ||
@@ -54,9 +68,9 @@ module.exports = async (Discord, client, message) => {
   setTimeout(() => time_stamps.delete(message.author.id), cooldown_amount);
 
   try {
-    await command.execute(client, message, args, cmd, Discord, profileData);
+    await command.execute(client, message, args, cmd, Discord);
   } catch (err) {
-    message.reply('There was an error trying to execute this command!');
+    message.reply('There was an error trying to execute this command! Error Log: \n' + err);
     console.log(err);
   } finally {
     // message.delete(5).catch((err) => {

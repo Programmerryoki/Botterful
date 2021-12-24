@@ -1,7 +1,11 @@
 const GOOGLE_PRIVATE_KEY = process.env["GOOGLE_PRIVATE_KEY"].replace(/\\n/g, '\n');
 const GOOGLE_CLIENT_EMAIL = process.env["GOOGLE_CLIENT_EMAIL"];
 const textToSpeech = require('@google-cloud/text-to-speech');
-const Voice = require("@discordjs/voice");
+const { createAudioResource, StreamType } = require("@discordjs/voice");
+const util = require("util");
+const fs = require("fs");
+
+const fileName = "../tmp.mp3";
 
 const client = new textToSpeech.TextToSpeechClient({
   credentials: {
@@ -11,17 +15,24 @@ const client = new textToSpeech.TextToSpeechClient({
   projectId: "botterful"
 });
 
-// languages: "en-US", ""
-var tts = async (text, language="en-US") => {
+// languages: "en-US", "ja-JP"
+var tts = async (text, language = "ja-JP") => {
   const request = {
     input: { text: text },
-    voice: { languageCode: 'en-US', ssmlGender: 'FEMALE' },
+    voice: { languageCode: language, ssmlGender: 'FEMALE' },
     audioConfig: { audioEncoding: 'MP3' },
   };
-  // console.log(client);
   const [response] = await client.synthesizeSpeech(request);
-  // console.log(response);
-  return response
+  await writeToFile(fileName, response);
+  return createAudioResource(fileName,
+    {
+      inputType: StreamType.Arbitrary,
+    });
 };
+
+var writeToFile = async (filename, data) => {
+  const writeFile = util.promisify(fs.writeFile);
+  var tmp = await writeFile(filename, data.audioContent, 'binary');
+}
 
 module.exports = { tts };

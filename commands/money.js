@@ -1,4 +1,4 @@
-const { pmMoneyBronze, pmMoneySilver, pmMoneyGold, getMoney } = require("../helper/money");
+const { pmMoneyBronze, pmMoneySilver, pmMoneyGold, getMoney } = require("../helper/database/money");
 const { createEmbed, createField } = require("../helper/embed");
 
 module.exports = {

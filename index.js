@@ -15,6 +15,7 @@ console.log(process.version);
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
+client.settings = new Discord.Collection();
 
 fs.readdirSync('./handlers/').forEach((handler) => {
   require(`./handlers/${handler}`)(client, Discord);

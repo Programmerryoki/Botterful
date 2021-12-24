@@ -1,4 +1,4 @@
-const profileModel = require('../models/profileSchema');
+const profileModel = require('../../models/profileSchema');
 
 const pmMoneyBronze = async (memberID, guildID, amount) => {
   let profile = await profileModel.findOneAndUpdate(

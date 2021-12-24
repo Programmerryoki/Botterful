@@ -7,7 +7,16 @@ module.exports = {
   example: '',
   cooldown: 10,
   execute(client, message, args, cmd, Discord, profileData) {
-    var embed = createEmbed("List of Commands", "Here are the list of commands that you can use.", client.commands.map((file) => createField(file.name, file.description, false)));
+    if (args.length > 0) {
+
+    } else {
+      var embed = createEmbed("List of Commands", "Here are the list of commands that you can use. For more information, type h 'commandName'", 
+      // [createField(client.commands.map((file) => ))]
+      client.commands.map((file) => createField(file.name ? file.name : ".", file.description ? file.description : ".", true)));
+      message.channel.send({ embed: embed });
+    }
+    var embed = createEmbed("List of Commands", "Here are the list of commands that you can use. For more information, type h 'commandName'", client.commands.map((file) => createField(file.name ? file.name : ".", file.description ? file.description : ".", true)));
+    console.log(embed);
     message.channel.send({ embed: embed });
   },
 };
