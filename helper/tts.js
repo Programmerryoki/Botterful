@@ -20,7 +20,8 @@ var tts = async (text, language = "ja-JP") => {
   const request = {
     input: { text: text },
     voice: { languageCode: language, ssmlGender: 'FEMALE' },
-    audioConfig: { audioEncoding: 'MP3' },
+    audioConfig: { audioEncoding: 'MP3', 
+    pitch: 0 },
   };
   const [response] = await client.synthesizeSpeech(request);
   await writeToFile(fileName, response);

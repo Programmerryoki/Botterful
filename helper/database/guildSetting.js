@@ -7,6 +7,7 @@ const createGuildSetting = async (guildID) => {
       serverID: guildID,
       autoRead: false,
       drChannel: "",
+      readName: false,
     });
     setting.save();
   }
@@ -17,12 +18,13 @@ const deleteGuildSetting = async (guildID) => {
 };
 
 const editSetting = async (guildID, setting) => {
-  await getSetting(guildID);
+  guildData = await getSetting(guildID);
   await guildSetting.findOneAndUpdate(
     { setverID: guildID },
     { 
-      autoRead: setting.autoRead == null ? false : setting.autoRead,
-      drChannel: setting.drChannel == null ? "" : setting.drChannel,
+      autoRead: setting.autoRead == null ? guildData.autoRead : setting.autoRead,
+      drChannel: setting.drChannel == null ? guildData.drChannel : setting.drChannel,
+      readName: setting.readName == null ? guildData.readName : setting.readName,
     }
   );
 }

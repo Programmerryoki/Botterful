@@ -1,4 +1,5 @@
-const { createVC, accessVC, deleteVC, playAudio, speakVC } = require("../helper/voice");
+const { createVC, accessVC, deleteVC } = require("../helper/voicechannel");
+const { speakVC } = require("../helper/voice");
 
 module.exports = {
   name: 'read',
@@ -11,9 +12,9 @@ module.exports = {
     if (args.length == 0) throw "Not Enough Arguments";
     if (args[0] == "start" || args[0] == "s") {
       const connection = createVC(message.member.voice);
-      client.settings.set("readChannel", );
+      client.settings.set("readChannel");
     } else if (args[0] == "e" || args[0] == "end") {
-      deleteVC(message.member.voice.channel);
+      deleteVC(message.member.voice);
     } else if (args[0] == "out" || args[0] == "o") {
       accessVC(message.member.voice);
       var sentence = args.slice(1).join(" ");

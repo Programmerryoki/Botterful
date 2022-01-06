@@ -1,7 +1,8 @@
 const PREFIX = process.env['PREFIX'];
 const { createProfile } = require('../../helper/database/profile');
 const { createGuildSetting, getSetting } = require('../../helper/database/guildSetting');
-const { getVC, speakVC } = require("../../helper/voice");
+const { getVC } = require("../../helper/voicechannel");
+const {speakVC} = require("../../helper/voice");
 
 const cooldowns = new Map();
 
@@ -18,7 +19,15 @@ module.exports = async (Discord, client, message) => {
     const tmp = await getVC(message.member.voice);
     if (!tmp) return;
     if (message.channel.id != settings.drChannel) return;
-    await speakVC(message, message.content);
+    const skip = ["www.", "http", "//", "```"];
+    for (var string of skip) {
+      if (message.content.includes(string)) return;
+    }
+    if (settings.readName) {
+      await speakVC(message, [message.member.displayName + "、" + message.content]);
+    } else {
+      await speakVC(message, [message.content]);
+    }
     return;
   }
 

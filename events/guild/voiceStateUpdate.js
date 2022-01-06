@@ -1,5 +1,5 @@
 const { getSetting } = require('../../helper/database/guildSetting');
-const { accessVC, deleteVC } = require("../../helper/voice");
+const { accessVC, deleteVC } = require("../../helper/voicechannel");
 
 module.exports = async (Discord, client, oldState, newState) => {
   const gid = oldState.guild.id;
@@ -14,7 +14,11 @@ module.exports = async (Discord, client, oldState, newState) => {
     }
   } else if (oldState.channel && !newState.channel) {
     const channel = await newState.guild.channels.fetch(oldState.channel.id);
-    if (settings.autoRead && channel.members.size == 1 ){
+    var botcount = 0;
+    for (var member of channel.members) {
+      if (member[1].user.bot) botcount += 1;
+    }
+    if (settings.autoRead && channel.members.size == botcount ){
       deleteVC(channel);
     }
   }
